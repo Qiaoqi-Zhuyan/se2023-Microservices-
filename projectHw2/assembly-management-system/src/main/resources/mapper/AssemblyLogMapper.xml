@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.assemblyManagementSystem.mapper.AssemblyLogMapper">
+
+    <insert id="insertAssemblyLog" parameterType="com.project.assemblyManagementSystem.bo.AssemblyLog">
+        INSERT INTO assemblylog (assemblyLogID, assemblyStepID, workstationID, componentsID, componentsType, assemblyDate, assemblyStatus)
+        VALUES (#{assemblyLogID}, #{assemblyStepID}, #{workstationID}, #{componentsID}, #{componentsType}, #{assemblyDate}, #{assemblyStatus})
+    </insert>
+
+
+    <delete id="deleteAssemblyLog" parameterType="com.project.assemblyManagementSystem.bo.AssemblyLog">
+        DELETE FROM assemblylog WHERE assemblyLogID = #{assemblyLogID}
+    </delete>
+
+<!--    <delete id="deleteAssemblyLog" parameterType="com.project.assemblyManagementSystem.bo.AssemblyLog">-->
+<!--        DELETE FROM assemblylogs-->
+<!--        <where>-->
+<!--            <if test="assemblyLogID != 0">-->
+<!--                AND assemblyLogID = #{assemblyLogID}-->
+<!--            </if>-->
+<!--            <if test="assemblyStepID != 0">-->
+<!--                AND assemblyStepID = #{assemblyStepID}-->
+<!--            </if>-->
+<!--            <if test="workstationID != 0">-->
+<!--                AND workstationID = #{workstationID}-->
+<!--            </if>-->
+<!--            <if test="componentsID != 0">-->
+<!--                AND componentsID = #{componentsID}-->
+<!--            </if>-->
+<!--            <if test="componentsType != null">-->
+<!--                AND componentsType = #{componentsType}-->
+<!--            </if>-->
+<!--            <if test="assemblyDate != null">-->
+<!--                AND assemblyDate = #{assemblyDate}-->
+<!--            </if>-->
+<!--            <if test="assemblyStatus != null">-->
+<!--                AND assemblyStatus = #{assemblyStatus}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </delete>-->
+
+
+    <update id="updateAssemblyLog" parameterType="com.project.assemblyManagementSystem.bo.AssemblyLog">
+        UPDATE assemblylog
+        <set>
+            <if test="assemblyStepID != null">
+                assemblyStepID = #{assemblyStepID},
+            </if>
+            <if test="workstationID != null">
+                workstationID = #{workstationID},
+            </if>
+            <if test="componentsID != null">
+                componentsID = #{componentsID},
+            </if>
+            <if test="componentsType != null">
+                componentsType = #{componentsType},
+            </if>
+            <if test="assemblyDate != null">
+                assemblyDate = #{assemblyDate},
+            </if>
+            <if test="assemblyStatus != null">
+                assemblyStatus = #{assemblyStatus},
+            </if>
+        </set>
+        WHERE assemblyLogID = #{assemblyLogID}
+    </update>
+
+
+    <select id="selectAssemblyLog" parameterType="com.project.assemblyManagementSystem.bo.AssemblyLog" resultType="com.project.assemblyManagementSystem.bo.AssemblyLog">
+        SELECT * FROM assemblylog
+        <where>
+            <if test="assemblyLogID != null">
+                AND assemblyLogID = #{assemblyLogID}
+            </if>
+            <if test="assemblyStepID != null">
+                AND assemblyStepID = #{assemblyStepID}
+            </if>
+            <if test="workstationID != null">
+                AND workstationID = #{workstationID}
+            </if>
+            <if test="componentsID != null">
+                AND componentsID = #{componentsID}
+            </if>
+            <if test="componentsType != null">
+                AND componentsType = #{componentsType}
+            </if>
+            <if test="assemblyDate != null">
+                AND assemblyDate = #{assemblyDate}
+            </if>
+            <if test="assemblyStatus != null">
+                AND assemblyStatus = #{assemblyStatus}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

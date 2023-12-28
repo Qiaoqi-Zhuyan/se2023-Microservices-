@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.device.mapper.OperationLogMapper">
+
+
+    <resultMap id="OperationLogMap"  type="com.project.device.bo.OperationLog">
+        <id property="logId" column="log_id"/>
+        <result property="deviceId" column="device_id"/>
+        <result property="operationType" column="operation_type"/>
+        <result property="operationDate" column="operation_date"/>
+        <result property="operator" column="operator"/>
+    </resultMap>
+
+
+    <insert id="insertOperationLogMapper" parameterType="com.project.device.bo.OperationLog">
+        INSERT INTO OperationLogs (log_id, device_id, operation_type, operation_date, operator)
+        VALUES (#{logId}, #{deviceId}, #{operationType}, #{operationDate}, #{operator})
+    </insert>
+
+    <delete id="deleteOperationLogMapper">
+        DELETE FROM OperationLogs WHERE log_id = #{logID}
+    </delete>
+
+
+    <select id="selectOperationLogByID" resultMap="OperationLogMap">
+        SELECT * FROM OperationLogs WHERE log_id = #{logID}
+    </select>
+
+
+    <select id="selectOperationLog" resultMap="OperationLogMap">
+        SELECT * FROM OperationLogs
+    </select>
+
+</mapper>

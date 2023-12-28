@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.exceptionHandle.mapper.ExceptionLogMapper">
+
+
+    <insert id="insertExceptionLog" parameterType="com.project.exceptionHandle.bo.ExceptionLog">
+        INSERT INTO exceptionlog (exceptionLogID, assemblyStepID, workstationID, componentsID, componentsType, assemblyDate, exceptionType)
+        VALUES (#{exceptionLogID}, #{assemblyStepID}, #{workstationID}, #{componentsID}, #{componentsType}, #{assemblyDate}, #{exceptionType})
+    </insert>
+
+    <delete id="deleteExceptionLog" parameterType="com.project.exceptionHandle.bo.ExceptionLog">
+        DELETE FROM exceptionlog WHERE exceptionLogID = #{exceptionLogID}
+    </delete>
+
+    <!-- Dynamic Delete ExceptionLog -->
+<!--    <delete id="deleteExceptionLogDynamic" parameterType="com.project.exceptionHandle.bo.ExceptionLog">-->
+<!--        DELETE FROM exception_logs-->
+<!--        <where>-->
+<!--            <if test="exceptionLogID != 0">-->
+<!--                AND exception_log_id = #{exceptionLogID}-->
+<!--            </if>-->
+<!--            <if test="assemblyStepID != 0">-->
+<!--                AND assembly_step_id = #{assemblyStepID}-->
+<!--            </if>-->
+<!--            <if test="workstationID != 0">-->
+<!--                AND workstation_id = #{workstationID}-->
+<!--            </if>-->
+<!--            <if test="componentsID != 0">-->
+<!--                AND components_id = #{componentsID}-->
+<!--            </if>-->
+<!--            <if test="componentsType != null">-->
+<!--                AND components_type = #{componentsType}-->
+<!--            </if>-->
+<!--            <if test="assemblyDate != null">-->
+<!--                AND assembly_date = #{assemblyDate}-->
+<!--            </if>-->
+<!--            <if test="exceptionType != null">-->
+<!--                AND exception_type = #{exceptionType}-->
+<!--            </if>-->
+<!--            <if test="defectReport != null">-->
+<!--                AND defect_report = #{defectReport}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </delete>-->
+
+
+    <update id="updateExceptionLog" parameterType="com.project.exceptionHandle.bo.ExceptionLog">
+        UPDATE exceptionlog
+        <set>
+            <if test="assemblyStepID != null">
+                assemblyStepID = #{assemblyStepID},
+            </if>
+            <if test="workstationID != null">
+                workstationID = #{workstationID},
+            </if>
+            <if test="componentsID != null">
+                componentsID = #{componentsID},
+            </if>
+            <if test="componentsType != null">
+                componentsType = #{componentsType},
+            </if>
+            <if test="assemblyDate != null">
+                assemblyDate = #{assemblyDate},
+            </if>
+            <if test="exceptionType != null">
+                exceptionType = #{exceptionType},
+            </if>
+
+        </set>
+        WHERE exceptionLogID = #{exceptionLogID}
+    </update>
+
+
+    <select id="selectExceptionLog" parameterType="com.project.exceptionHandle.bo.ExceptionLog" resultType="com.project.exceptionHandle.bo.ExceptionLog">
+        SELECT * FROM exceptionlog
+        <where>
+            <if test="exceptionLogID != null">
+                AND exceptionLogID = #{exceptionLogID}
+            </if>
+            <if test="assemblyStepID != null">
+                AND assemblyStepID = #{assemblyStepID}
+            </if>
+            <if test="workstationID != null">
+                AND workstationID = #{workstationID}
+            </if>
+            <if test="componentsID != null">
+                AND componentsID = #{componentsID}
+            </if>
+            <if test="componentsType != null">
+                AND componentsType = #{componentsType}
+            </if>
+            <if test="assemblyDate != null">
+                AND assemblyDate = #{assemblyDate}
+            </if>
+            <if test="exceptionType != null">
+                AND exceptionType = #{exceptionType}
+            </if>
+        </where>
+    </select>
+
+</mapper>

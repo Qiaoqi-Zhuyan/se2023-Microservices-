@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <RollingFile name="EmailAlarmServiceServiceAppender" fileName="${WORKDIR}/logs/EmailAlarmService/app.log" filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="50MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug" >
+            <Logger name="com.project.emailAlarm.service.impl.EmailAlarmServiceImpl" level="debug" additivity="false">
+                <AppenderRef ref="EmailAlarmServiceServiceAppender" />
+            </Logger>
+
+        </Root>
+    </Loggers>
+</Configuration>

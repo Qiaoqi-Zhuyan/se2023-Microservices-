@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zr.book.mapper.BookBorrowMapper">
+
+    <resultMap id="BookMap" type="com.zr.book.bo.Book">
+        <id property="id" column="id" />
+        <result property="bookId" column="book_id" />
+        <result property="title" column="title" />
+        <result property="author" column="author" />
+        <result property="isbn" column="isbn" />
+        <result property="publisher" column="publisher" />
+        <result property="stock" column="stock" />
+        <result property="borrowedQuantity" column="borrowed_quantity" />
+    </resultMap>
+
+    <!-- 查询书籍 -->
+
+    <select id="selectBook" resultMap="BookMap">
+        SELECT * FROM Books WHERE book_id = #{bookId}
+    </select>
+
+    <!-- 更新库存和借出数量 -->
+    <update id="updateInventory">
+        UPDATE books
+        SET stock = stock - #{quantity}, borrowed_quantity = borrowed_quantity + #{quantity}
+        WHERE book_id = #{bookId}
+    </update>
+
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="book-system" />
+        <module name="book-service" />
+        <module name="book-borrow-service" />
+        <module name="book-return-service" />
+        <module name="book-return-service-provider" />
+        <module name="book-service-provider" />
+        <module name="book-borrow-service-provider" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="book-service (1)" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

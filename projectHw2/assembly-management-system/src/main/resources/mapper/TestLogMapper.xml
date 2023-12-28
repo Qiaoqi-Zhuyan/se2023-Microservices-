@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.assemblyManagementSystem.mapper.TestLogMapper">
+
+
+    <insert id="insertTestLog" parameterType="com.project.assemblyManagementSystem.bo.TestLog">
+        INSERT INTO testlog (testLogID, componentsID, testItem, testResults, testTimes, alarmStatus)
+        VALUES (#{testLogID}, #{componentsID}, #{testItem}, #{testResults}, #{testTimes}, #{alarmStatus})
+    </insert>
+
+
+    <delete id="deleteTestLog" parameterType="com.project.assemblyManagementSystem.bo.TestLog">
+        DELETE FROM testlog WHERE testLogID = #{testLogID}
+    </delete>
+
+
+    <update id="updateTestLog" parameterType="com.project.assemblyManagementSystem.bo.TestLog">
+        UPDATE testlog
+        <set>
+            <if test="componentsID != null">
+                componentsID = #{componentsID},
+            </if>
+            <if test="testItem != null">
+                testItem = #{testItem},
+            </if>
+            <if test="testResults != null">
+                testResults = #{testResults},
+            </if>
+            <if test="testTimes != null">
+                testTimes = #{testTimes},
+            </if>
+            <if test="alarmStatus != null">
+                alarmStatus = #{alarmStatus},
+            </if>
+        </set>
+        WHERE testLogID = #{testLogID}
+    </update>
+
+
+    <select id="selectTestLog" parameterType="com.project.assemblyManagementSystem.bo.TestLog" resultType="com.project.assemblyManagementSystem.bo.TestLog">
+        SELECT * FROM testlog
+        <where>
+            <if test="testLogID != null">
+                AND testLogID = #{testLogID}
+            </if>
+            <if test="componentsID != null">
+                AND componentsID = #{componentsID}
+            </if>
+            <if test="testItem != null">
+                AND testItem = #{testItem}
+            </if>
+            <if test="testResults != null">
+                AND testResults = #{testResults}
+            </if>
+            <if test="testTimes != null">
+                AND testTimes = #{testTimes}
+            </if>
+            <if test="alarmStatus != null">
+                AND alarmStatus = #{alarmStatus}
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.device.mapper.DeviceMapper">
+
+    <resultMap id="DeviceMap"  type="com.project.device.bo.Device">
+        <id property="deviceId" column="device_id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="status" column="status"/>
+        <result property="manufacturer" column="manufacturer"/>
+        <result property="manufactureDate" column="manufacture_date" />
+    </resultMap>
+
+    <!-- 插入设备 -->
+    <insert id="insertDevice" parameterType="com.project.device.bo.Device">
+        INSERT INTO Devices (device_id, name, type, status, manufacturer, manufacture_date)
+        VALUES (#{deviceId}, #{name}, #{type}, #{status}, #{manufacturer}, #{manufactureDate})
+    </insert>
+
+    <!-- 删除设备 -->
+    <delete id="deleteDevice" >
+        DELETE FROM Devices WHERE device_id = #{deviceId}
+    </delete>
+
+    <!-- 更新设备信息 -->
+    <update id="updateDevice" parameterType="com.project.device.bo.Device">
+        UPDATE Devices
+        SET name = #{name}, type = #{type}, status = #{status}, manufacturer = #{manufacturer}, manufacture_date = #{manufactureDate}
+        WHERE device_id = #{deviceId}
+    </update>
+
+    <!-- 查询所有设备 -->
+    <select id="selectAllDevice"  resultMap="DeviceMap">
+        SELECT * FROM Devices
+    </select>
+
+
+    <!-- 根据ID查询设备 -->
+    <select id="selectDeviceByID"  resultMap="DeviceMap">
+        SELECT * FROM Devices WHERE device_id = #{deviceId}
+    </select>
+
+    <!-- 动态查询 -->
+    <select id="selectDevice" parameterType="com.project.device.bo.Device" resultMap="DeviceMap">
+        SELECT * FROM Devices
+        <where>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="type != null">AND type = #{type}</if>
+            <if test="status != null">AND status = #{status}</if>
+            <if test="manufacturer != null">AND manufacturer = #{manufacturer}</if>
+            <if test="manufactureDate != null">AND manufacture_date = #{manufactureDate}</if>
+        </where>
+    </select>
+
+
+
+</mapper>
